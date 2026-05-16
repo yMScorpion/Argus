@@ -1,0 +1,113 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/argus-core-types",
+    "crates/argus-time",
+    "crates/argus-decimal",
+    "crates/argus-errors",
+    "crates/argus-capability",
+    "crates/argus-provenance",
+    "crates/argus-schema",
+    "crates/argus-shm",
+    "crates/argus-ipc",
+    "crates/argus-metrics",
+    "crates/argus-orderbook",
+    "crates/argus-connectors-core",
+    "crates/argus-connectors-fixture",
+    "crates/argus-derived",
+    "crates/argus-data-plane",
+    "crates/argus-audit",
+    "crates/argus-risk",
+    "crates/argus-replay",
+    "crates/argus-storage",
+    "crates/argus-observability",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.78"
+license = "Proprietary"
+authors = ["ARGUS contributors"]
+repository = "https://argus.dev/spec"
+
+[workspace.dependencies]
+# Core
+thiserror = "1.0"
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bytes = "1.5"
+smallvec = { version = "1.13", features = ["serde", "union"] }
+
+# Numeric
+rust_decimal = { version = "1.33", features = ["serde-with-str", "maths"] }
+rust_decimal_macros = { version = "1.33" }
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Concurrency / async
+parking_lot = "0.12"
+crossbeam-utils = "0.8"
+arc-swap = "1.6"
+
+# Hashing / IDs
+blake3 = "1.5"
+uuid = { version = "1.6", features = ["v4", "v7", "serde"] }
+
+# Logging / tracing
+tracing = { version = "0.1", features = ["attributes"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Memory / allocators
+slab = "0.4"
+
+# Testing
+proptest = "1.4"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+# Internal crates (single source of truth for versions)
+argus-core-types = { path = "crates/argus-core-types" }
+argus-time = { path = "crates/argus-time" }
+argus-decimal = { path = "crates/argus-decimal" }
+argus-errors = { path = "crates/argus-errors" }
+argus-capability = { path = "crates/argus-capability" }
+argus-provenance = { path = "crates/argus-provenance" }
+argus-schema = { path = "crates/argus-schema" }
+argus-shm = { path = "crates/argus-shm" }
+argus-ipc = { path = "crates/argus-ipc" }
+argus-metrics = { path = "crates/argus-metrics" }
+argus-orderbook = { path = "crates/argus-orderbook" }
+argus-connectors-core = { path = "crates/argus-connectors-core" }
+argus-connectors-fixture = { path = "crates/argus-connectors-fixture" }
+argus-derived = { path = "crates/argus-derived" }
+argus-data-plane = { path = "crates/argus-data-plane" }
+argus-audit = { path = "crates/argus-audit" }
+argus-risk = { path = "crates/argus-risk" }
+argus-replay = { path = "crates/argus-replay" }
+argus-storage = { path = "crates/argus-storage" }
+argus-observability = { path = "crates/argus-observability" }
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+debug = "line-tables-only"
+panic = "abort"
+overflow-checks = false
+
+[profile.release-with-debug]
+inherits = "release"
+debug = true
+strip = false
+
+[profile.bench]
+opt-level = 3
+lto = "thin"
+debug = true
+
+[profile.dev]
+opt-level = 0
+debug = true
+overflow-checks = true

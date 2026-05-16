@@ -1,0 +1,14 @@
+[package]
+name = "argus-shm"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+crossbeam-utils.workspace = true
+thiserror.workspace = true
+argus-errors.workspace = true
+
+[dev-dependencies]
+proptest.workspace = true

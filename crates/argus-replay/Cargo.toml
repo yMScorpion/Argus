@@ -1,0 +1,23 @@
+[package]
+name = "argus-replay"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+blake3.workspace = true
+argus-core-types.workspace = true
+argus-errors.workspace = true
+argus-schema.workspace = true
+argus-storage.workspace = true
+argus-time.workspace = true
+
+[dev-dependencies]
+argus-decimal.workspace = true
+tempfile = "3.8"
+rust_decimal.workspace = true
+rust_decimal_macros.workspace = true

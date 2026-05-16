@@ -1,0 +1,19 @@
+[build]
+rustflags = [
+    "-D", "warnings",
+    "-W", "rust-2018-idioms",
+    "-W", "unreachable-pub",
+    "-W", "missing-debug-implementations",
+]
+
+[target.'cfg(target_os = "linux")']
+rustflags = [
+    "-D", "warnings",
+    "-C", "target-cpu=x86-64-v3",
+]
+
+[alias]
+ci = "test --workspace --all-targets --no-fail-fast"
+ci-fmt = "fmt --all -- --check"
+ci-clippy = "clippy --workspace --all-targets -- -D warnings"
+ci-doc = "doc --workspace --no-deps --document-private-items"

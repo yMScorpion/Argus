@@ -1,0 +1,15 @@
+[package]
+name = "argus-connectors-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+async-trait = "0.1"
+argus-core-types.workspace = true
+argus-capability.workspace = true
+argus-schema.workspace = true
+argus-errors.workspace = true

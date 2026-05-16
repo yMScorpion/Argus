@@ -1,0 +1,22 @@
+[package]
+name = "argus-schema"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+smallvec.workspace = true
+rust_decimal.workspace = true
+
+argus-core-types.workspace = true
+argus-time.workspace = true
+argus-decimal.workspace = true
+argus-capability.workspace = true
+argus-errors.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+rust_decimal_macros.workspace = true

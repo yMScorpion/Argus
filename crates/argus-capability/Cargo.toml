@@ -1,0 +1,15 @@
+[package]
+name = "argus-capability"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+smallvec.workspace = true
+argus-core-types.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

@@ -1,0 +1,15 @@
+[package]
+name = "argus-provenance"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+smallvec.workspace = true
+argus-core-types.workspace = true
+argus-capability.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
