@@ -1,0 +1,15 @@
+/target
+/data
+/tmp
+**/*.rs.bk
+*.pdb
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.parquet
+/fixtures/recorded/
+/checkpoints/
+/audit/
+node_modules/
+dist/
