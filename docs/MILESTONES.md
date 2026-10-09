@@ -12,7 +12,7 @@
 | Terminal / live connectors | Planned | Read-only terminal and one read-only connector |
 | Risk execution / paper trading | Primitives only | Simulated venue and reconciliation before any live routing |
 
-[Detailed current roadmap](ROADMAP.md) · [Original 28-phase plan](roadmap.md). A checked phase in the original plan means a foundation milestone; it does not imply every production subsystem is complete.
+[Project overview](../README.md) · [Original 28-phase plan](roadmap.md). A checked phase in the original plan means a foundation milestone; it does not imply every production subsystem is complete.
 
 
 ## Release gate
