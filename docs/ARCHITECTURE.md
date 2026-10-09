@@ -29,4 +29,4 @@ The target topology is Terminal / Data Plane / Risk Daemon / Research. [ADRs](ar
 
 ## Verification boundary
 
-The implementation diagram describes inspected source paths. It is not a screenshot, a production deployment claim or a measured latency/throughput result. See [verification](VERIFICATION.md) and [roadmap](ROADMAP.md).
+The implementation diagram describes inspected source paths. It is not a screenshot, a production deployment claim or a measured latency/throughput result. See [verification](VERIFICATION.md) and [roadmap](MILESTONES.md).

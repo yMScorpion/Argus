@@ -8,7 +8,7 @@
 
 ARGUS explores canonical market events, an L2 order book, storage/checkpoints, replay, audit trails and observability. This release is the **foundation of phases 0–6**, built around fixtures. The four-process platform is the target architecture, not four completed production applications.
 
-[Case study](https://isaacvaleriano.netlify.app/en/projects/argus/) · [Architecture](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Roadmap](docs/ROADMAP.md) · [Português](README.pt-BR.md)
+[Case study](https://isaacvaleriano.netlify.app/en/projects/argus/) · [Architecture](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Roadmap](docs/MILESTONES.md) · [Português](README.pt-BR.md)
 
 ## What can be verified today
 
@@ -77,14 +77,14 @@ The test suite uses fixtures and temporary local files. No exchange credentials 
 | Terminal / live connectors | Planned | Read-only terminal and one read-only connector |
 | Risk execution / paper trading | Primitives only | Simulated venue and reconciliation before any live routing |
 
-[Detailed current roadmap](docs/ROADMAP.md) · [Original 28-phase plan](docs/roadmap.md). A checked phase in the original plan means a foundation milestone; it does not imply every production subsystem is complete.
+[Detailed current roadmap](docs/MILESTONES.md) · [Original 28-phase plan](docs/roadmap.md). A checked phase in the original plan means a foundation milestone; it does not imply every production subsystem is complete.
 
 ## Documentation
 
 - [Architecture and boundaries](docs/ARCHITECTURE.md)
 - [Build and test workflow](docs/GETTING_STARTED.md)
 - [Reproducible verification](docs/VERIFICATION.md)
-- [Roadmap with acceptance criteria](docs/ROADMAP.md)
+- [Roadmap with acceptance criteria](docs/MILESTONES.md)
 - [Numeric and storage ADRs](docs/architecture/adr/)
 - [Failure modes](docs/architecture/failure-modes.md)
 
