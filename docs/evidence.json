@@ -1,0 +1,17 @@
+{
+  "project": "Argus",
+  "checked_at": "2026-10-09",
+  "baseline_revision": "167b4e8e2a9e42babfcf1b8428c4a539ac1f4ae3",
+  "verification_kind": "local-offline-tests",
+  "command": "cargo test --workspace --locked",
+  "toolchain": "rustc 1.95.0 (59807616e 2026-04-14)",
+  "platform": "macOS x86_64",
+  "passed": 176,
+  "failed": 0,
+  "scope": "Workspace unit/property/integration/doctests",
+  "limits": [
+    "No live orders",
+    "No measured trading performance",
+    "No published latency/throughput benchmark"
+  ]
+}

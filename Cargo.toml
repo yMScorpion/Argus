@@ -27,9 +27,9 @@ members = [
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.78"
-license = "Proprietary"
+license = "PolyForm-Noncommercial-1.0.0"
 authors = ["ARGUS contributors"]
-repository = "https://argus.dev/spec"
+repository = "https://github.com/yMScorpion/Argus"
 
 [workspace.dependencies]
 # Core

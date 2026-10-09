@@ -1,93 +1,95 @@
+<img src="docs/assets/banner.svg" width="1200" alt="Argus — Observe. Preserve. Replay.">
+
+<p><img alt="Rust" src="https://img.shields.io/badge/Rust-252525?style=for-the-badge&logo=rust&logoColor=white"> <img alt="Serde" src="https://img.shields.io/badge/Serde-252525?style=for-the-badge&logo=rust&logoColor=white"> <img alt="BLAKE3" src="https://img.shields.io/badge/BLAKE3-252525?style=for-the-badge&logo=rust&logoColor=white"> <img alt="Prometheus" src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white"></p>
+
 # ARGUS
 
-Plataforma de trading cripto: análise técnica e orderflow nível institucional.
+**A Rust foundation for inspecting, preserving and replaying market data.**
 
-> *"See everything. Trade nothing else."*
+ARGUS explores canonical market events, an L2 order book, storage/checkpoints, replay, audit trails and observability. This release is the **foundation of phases 0–6**, built around fixtures. The four-process platform is the target architecture, not four completed production applications.
 
-## Status
+[Case study](https://isaacvaleriano.netlify.app/en/projects/argus/) · [Architecture](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Roadmap](docs/ROADMAP.md) · [Português](README.pt-BR.md)
 
-**Em construção.** Fundação arquitetural (Fases 0-6 do roadmap). Não usar para trading real.
+## What can be verified today
 
-## Topologia
+| Evidence | Result | Reproduce / inspect |
+|---|---:|---|
+| Workspace test run | **176 passed · 0 failed** | `cargo test --workspace --locked`; [run record](docs/VERIFICATION.md) |
+| Workspace composition | **20 crates** | [Cargo.toml](Cargo.toml) |
+| Numeric representation | **i128 ticks / lots / minor units** | [argus-decimal](crates/argus-decimal/src/lib.rs) |
+| L2 correctness exercise | **200 generated cases per property** | [property tests](crates/argus-orderbook/tests/property.rs) |
+| Durable warm-tier implementation | **JSONL + checkpoints** | [storage](crates/argus-storage/src/lib.rs) |
 
-ARGUS é uma **suíte de quatro processos** isolados por domínio de falha:
+These are local engineering checks, not trading performance, exchange throughput or latency guarantees. The run record states the revision and environment. Bench harnesses exist; published benchmark claims require a separately recorded run.
 
-| Processo | Responsabilidade | Acesso a credenciais |
-|---|---|---|
-| **Terminal** | Render, drawings, anotações; emite *intents* | Não |
-| **Data Plane** | Ingest, normalize, store, replay, quality scoring | Não |
-| **Risk Daemon** | Risk envelope, order routing, reconciliation, kill switch | **Sim, único** |
-| **Research** | Backtest, ML, plugin marketplace | Não |
+![Recorded local test result](docs/assets/verification.svg)
 
-Crash do Terminal **não** mata posições abertas. Crash do Data Plane **não** afeta ordens. Risk Daemon é o componente mais protegido — restart com reconciliação obrigatória antes de aceitar novos intents.
+## Architecture
 
-## Roadmap
+![ARGUS implementation flow](docs/assets/architecture.svg)
 
-Veja `docs/roadmap.md` para as 27 fases. Esta versão entrega Fases 0-6:
+```mermaid
+flowchart LR
+  F[Fixture connector] --> E[Canonical events]
+  E --> B[L2 order book]
+  E --> H[Hot memory]
+  E --> J[JSONL segments]
+  B --> C[Checkpoints]
+  J --> R[Replay session]
+  C --> R
+  R --> V[BLAKE3 verification]
+  E --> M[Metrics and traces]
+```
 
-- **Fase 0** — Operating system de desenvolvimento (workspace, ADRs, CI, ownership)
-- **Fase 1** — Tipos fundamentais, schemas, contratos
-- **Fase 2** — IPC tipado, SHM SPSC lock-free, health protocol, command bus
-- **Fase 3** — Data Plane skeleton com fixture connector, SHM publisher, quality tracker
-- **Fase 4** — Orderbook L2 com slab arena + property tests (stress 500-2000 ops)
-- **Fase 5** — Storage tiered (hot/JSONL warm), checkpoints, replay determinístico, branching
-- **Fase 6** — Métricas (registry + Prometheus exporter), `Sensitive<T>`, JSON structured logging, trace primitives
+- **Contracts:** canonical IDs, exchange/receive/process time, capabilities, provenance and serializable schemas.
+- **Order book:** slab-backed levels, snapshot/delta application, sequence-gap handling and reference comparisons.
+- **Transport foundation:** a typed command bus and SPSC ring. The current ring uses process-allocated memory; OS-backed interprocess shared memory is unfinished.
+- **Storage/replay:** hot memory, append-only JSONL segments, seek indexes and hash-verified checkpoints. Branch overlays preserve the original event sequence.
+- **Risk/audit:** envelope and lifecycle primitives plus an append-only hash chain. A live order router and reconciliation daemon are not implemented here.
+- **Observability:** a registry, Prometheus text exposition, structured JSON logs, trace primitives and sensitive-value formatting.
 
-## Build
+The target topology is Terminal / Data Plane / Risk Daemon / Research. [ADRs](docs/architecture/adr/) distinguish decisions from current implementation. There is **no finished GUI/dashboard** to screenshot; the diagram above is a diagram.
+
+## Run locally
+
+Rust stable and Cargo are required. `rust-toolchain.toml` selects stable; the workspace declares Rust 1.78 as its minimum, but the published run uses Rust 1.95.0 (the declared minimum was not validated).
 
 ```bash
-cargo build --workspace
-cargo test --workspace
+git clone https://github.com/yMScorpion/Argus.git
+cd Argus
+cargo test --workspace --locked
+cargo build --workspace --locked
+# Optional benchmark run; do not compare numbers across machines without context:
 cargo bench --workspace
-make ci
 ```
 
-Toolchain: Rust stable 1.78+.
+The test suite uses fixtures and temporary local files. No exchange credentials are needed. See [Getting started](docs/GETTING_STARTED.md) for useful focused commands.
 
-## Estrutura
+## Milestones and next steps
 
-```
-crates/
-  argus-core-types/      # IDs canônicos, instrument, venue
-  argus-time/            # clock model (exchange/recv/process)
-  argus-decimal/         # PriceTicks/QtyLots/MoneyMinor (i128, sem f64)
-  argus-errors/          # taxonomia ArgusError
-  argus-capability/      # capability matrix por venue
-  argus-provenance/      # provenance tracking
-  argus-schema/          # tipos serializáveis (Cap'n Proto migration: ADR-0006)
-  argus-shm/             # SPSC ring buffer lock-free
-  argus-ipc/             # comando bus tipado
-  argus-orderbook/       # L2 com slab arena (não BTreeMap)
-  argus-connectors-core/ # VenueConnector trait
-  argus-connectors-fixture/ # connector determinístico para testes
-  argus-derived/         # CVD, candles, footprint
-  argus-data-plane/      # binário Data Plane
-  argus-audit/           # log append-only com hash chain
-  argus-risk/            # envelope + state machine
-  argus-replay/          # replay determinístico com branching
-  argus-storage/         # hot tier + JSONL warm tier + checkpoints + segment index
-  argus-observability/   # metrics registry, Prometheus exporter, Sensitive, traces
+| Area | Current state | Next acceptance criterion |
+|---|---|---|
+| Contracts and fixture pipeline | Implemented and locally tested | Validate the contract against a read-only venue feed |
+| L2 book and sequence handling | Implemented; reference/property tests | Capture/replay real feed gaps without divergence |
+| JSONL / checkpoints / replay | Implemented | Exercise long-running recovery; evaluate a columnar backend |
+| SPSC transport | In-process foundation | Add OS-backed shared memory and independent-process tests |
+| Observability | Text metrics and JSON logs | Add HTTP/OTLP export and end-to-end propagation |
+| Terminal / live connectors | Planned | Read-only terminal and one read-only connector |
+| Risk execution / paper trading | Primitives only | Simulated venue and reconciliation before any live routing |
 
-docs/
-  architecture/
-    adr/                 # decisões arquiteturais
-    invariants/          # invariantes não-negociáveis
-    process-boundaries.md
-    failure-modes.md
-    latency-budget.md
-  roadmap.md
-  ownership.md
-```
+[Detailed current roadmap](docs/ROADMAP.md) · [Original 28-phase plan](docs/roadmap.md). A checked phase in the original plan means a foundation milestone; it does not imply every production subsystem is complete.
 
-## Princípios não-negociáveis
+## Documentation
 
-1. **Cada processo, um propósito.** Fronteiras de IPC tipadas; falhas isoladas.
-2. **Latência mensurada e mostrada.** Decomposição source/internal/execution exposta na UI.
-3. **Capability-aware.** L3 não é fingido onde só existe L2.
-4. **Provenance always.** Toda métrica carrega fonte/latência/confidence.
-5. **Risk antes de feature.** Envelope, kill switch, audit log presentes desde o MVP.
-6. **Numeric policy.** `i128` em ticks/lots/money minor para qualquer caminho que toca PnL/risk/execução. `f64` só em render.
+- [Architecture and boundaries](docs/ARCHITECTURE.md)
+- [Build and test workflow](docs/GETTING_STARTED.md)
+- [Reproducible verification](docs/VERIFICATION.md)
+- [Roadmap with acceptance criteria](docs/ROADMAP.md)
+- [Numeric and storage ADRs](docs/architecture/adr/)
+- [Failure modes](docs/architecture/failure-modes.md)
 
-## Licença
+## License
 
-Proprietário, todos os direitos reservados.
+**Source available under [PolyForm Noncommercial 1.0.0](LICENSE).** Noncommercial research and study are permitted under its terms. Commercial use of Isaac’s original project requires separate permission. Dependency licenses remain their own; “public source” is not the same as a permissive open-source license.
+
+Built by [Isaac Valeriano](https://github.com/yMScorpion). Behind every line of code, there is a builder.
