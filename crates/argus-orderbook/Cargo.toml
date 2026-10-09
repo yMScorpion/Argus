@@ -1,0 +1,22 @@
+[package]
+name = "argus-orderbook"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+slab.workspace = true
+smallvec.workspace = true
+argus-core-types.workspace = true
+argus-decimal.workspace = true
+argus-errors.workspace = true
+argus-schema.workspace = true
+argus-time.workspace = true
+
+[dev-dependencies]
+proptest.workspace = true
+rust_decimal.workspace = true
+rust_decimal_macros.workspace = true

@@ -1,0 +1,18 @@
+[package]
+name = "argus-derived"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+smallvec.workspace = true
+argus-core-types.workspace = true
+argus-decimal.workspace = true
+argus-schema.workspace = true
+argus-time.workspace = true
+
+[dev-dependencies]
+rust_decimal.workspace = true
+rust_decimal_macros.workspace = true

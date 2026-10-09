@@ -1,0 +1,299 @@
+     Running unittests src/lib.rs (target/debug/deps/argus_audit-e7bbf79405efaf22)
+running 3 tests
+test tests::recovers_state_on_reopen ... ok
+test tests::append_and_verify_roundtrip ... ok
+test tests::tampering_is_detected ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_capability-52d2d0f2a1147f32)
+running 4 tests
+test tests::book_depth_supports_full ... ok
+test tests::book_depth_min ... ok
+test tests::confidence_levels ... ok
+test tests::confidence_min_inherits ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_connectors_core-90ffaa159ffd791e)
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_connectors_fixture-1eca03c7c9d5204e)
+running 5 tests
+test generator::tests::first_event_is_snapshot ... ok
+test generator::tests::sequences_are_monotonic_without_gaps ... ok
+test generator::tests::deterministic_same_seed_same_output ... ok
+test generator::tests::different_seed_different_output ... ok
+test generator::tests::produces_expected_event_count ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_core_types-d075106c3eed00f3)
+running 16 tests
+test ids::tests::string_id_construction ... ok
+test ids::tests::ids_are_distinct_types ... ok
+test ids::tests::u64_id_serde_is_transparent ... ok
+test instrument::tests::perp_has_funding ... ok
+test instrument::tests::instrument_id_changes_with_venue ... ok
+test instrument::tests::aliases_dont_affect_id ... ok
+test instrument::tests::instrument_id_is_deterministic ... ok
+test process::tests::data_plane_does_not_emit_intents ... ok
+test instrument::tests::instrument_id_changes_with_contract_type ... ok
+test side::tests::opposite_is_involution ... ok
+test process::tests::only_risk_daemon_has_credentials ... ok
+test side::tests::signed_sums_correctly ... ok
+test venue::tests::dex_classification ... ok
+test venue::tests::ordering_is_stable ... ok
+test venue::tests::venue_serde_roundtrip ... ok
+test ids::tests::u128_id_v7_monotonic_in_practice ... ok
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_data_plane-2c6a57486a0741ce)
+running 8 tests
+test publisher::tests::consumer_only_attached_once ... ok
+test quality::tests::age_ms_zero_when_now_equals_last ... ok
+test quality::tests::confidence_drops_on_stale ... ok
+test quality::tests::observe_increments_event_count ... ok
+test quality::tests::source_latency_observed ... ok
+test publisher::tests::publish_drain_roundtrip ... ok
+test quality::tests::age_ms_progresses ... ok
+test quality::tests::detects_sequence_gap ... ok
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/argus_decimal-226e9f896d908381)
+running 28 tests
+test basis_points::tests::apply_taker_fee ... ok
+test basis_points::tests::apply_rebate_negative ... ok
+test basis_points::tests::rounds_toward_zero ... ok
+test money::tests::add_currency_mismatch_errors ... ok
+test money::tests::btc_satoshis_roundtrip ... ok
+test money::tests::usd_roundtrip ... ok
+test money::tests::over_precision_rejects ... ok
+test price::tests::aligned_value_roundtrips ... ok
+test price::tests::arithmetic_overflow_detected ... ok
+test price::tests::arithmetic_requires_same_tick_size ... ok
+test price::tests::reject_if_not_aligned_works ... ok
+test price::tests::round_down_truncates_toward_negative ... ok
+test price::tests::round_nearest_breaks_ties_to_zero ... ok
+test price::tests::round_up_truncates_toward_positive ... ok
+test qty::tests::aligned_roundtrip ... ok
+test qty::tests::negative_qty_roundtrip ... ok
+test qty::tests::reject_unaligned_qty ... ok
+test size::tests::lot_size_rejects_zero_or_negative ... ok
+test size::tests::tick_size_rejects_zero_or_negative ... ok
+test money::tests::add_associative ... ok
+test qty::tests::add_is_associative ... ok
+test money::tests::add_commutative ... ok
+test qty::tests::add_is_commutative ... ok
+test money::tests::decimal_roundtrip ... ok
+test qty::tests::aligned_qty_roundtrip ... ok
+test price::tests::round_up_never_below_input ... ok
+test price::tests::aligned_roundtrip_preserves_value ... ok
+test price::tests::round_down_never_above_input ... ok
+test result: ok. 28 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/argus_derived-d2d8649eb7dc819d)
+running 5 tests
+test candle::tests::aligns_correctly ... ok
+test candle::tests::closes_candle_when_window_advances ... ok
+test candle::tests::builds_single_candle ... ok
+test cvd::tests::cvd_accumulates_signed ... ok
+test cvd::tests::reset_clears ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_errors-a204ce869e52b538)
+running 3 tests
+test tests::security_is_fatal ... ok
+test tests::codes_are_stable_slugs ... ok
+test tests::serde_roundtrip ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_ipc-58429385bf58698e)
+running 10 tests
+test health::tests::default_state_is_starting ... ok
+test command::tests::heartbeat_is_small ... ok
+test health::tests::only_ready_accepts_execution ... ok
+test health::tests::worst_subsystem_picks_red ... ok
+test tests::envelope_verifies_integrity ... ok
+test tests::corrupted_body_detected ... ok
+test command::tests::command_roundtrip_kill_switch ... ok
+test health::tests::serde_roundtrip ... ok
+test command::tests::command_roundtrip_subscription ... ok
+test command::tests::command_roundtrip_intent_result ... ok
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_metrics-7a2d5f0b123304c1)
+running 6 tests
+test counter::tests::counter_increments ... ok
+test counter::tests::gauge_sets ... ok
+test histogram::tests::empty_snapshot ... ok
+test histogram::tests::observe_large_values ... ok
+test histogram::tests::percentile_bucket_correctness ... ok
+test counter::tests::counter_thread_safe ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_observability-fcec211f888f9cee)
+running 19 tests
+test prometheus::tests::empty_registry_renders_empty_string ... ok
+test registry::tests::label_set_deduplicates_keys ... ok
+test prometheus::tests::label_values_are_escaped ... ok
+test prometheus::tests::counter_is_rendered ... ok
+test prometheus::tests::histogram_emits_quantile_lines ... ok
+test registry::tests::counter_registration_is_idempotent ... ok
+test registry::tests::different_labels_are_different_metrics ... ok
+test registry::tests::label_set_is_sorted ... ok
+test prometheus::tests::gauge_is_rendered ... ok
+test sensitive::tests::debug_does_not_emit_value ... ok
+test sensitive::tests::display_does_not_emit_value ... ok
+test sensitive::tests::expose_returns_value ... ok
+test sensitive::tests::into_inner_consumes ... ok
+test sensitive::tests::serde_roundtrip_is_transparent ... ok
+test registry::tests::mismatched_kinds_panic - should panic ... ok
+test trace::tests::empty_trace_returns_zero_duration ... ok
+test trace::tests::stage_duration_basic ... ok
+test trace::tests::trace_total_duration_spans_stages ... ok
+test logs::tests::init_is_idempotent ... ok
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_orderbook-f0dccffbd6f4a83d)
+running 12 tests
+test book::tests::cant_apply_delta_to_empty_book ... ok
+test book::tests::sequence_gap_detected ... ok
+test book::tests::delta_advances_book ... ok
+test book::tests::snapshot_initializes_book ... ok
+test ladder::tests::ask_orders_ascending ... ok
+test ladder::tests::clear_resets ... ok
+test ladder::tests::update_existing_level ... ok
+test ladder::tests::bid_orders_descending ... ok
+test ladder::tests::zero_size_removes_level ... ok
+test book::tests::snapshot_resyncs_book ... ok
+test book::tests::zero_qty_removes_level_via_delta ... ok
+test ladder::tests::many_inserts_and_deletes ... ok
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running tests/property.rs (target/debug/deps/property-b3e5c9377ca9a0e2)
+running 3 tests
+test invariants_hold_after_random_ops ... ok
+test book_matches_reference_on_random_ops ... ok
+test stress_large_sequence ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 26.07s
+     Running unittests src/lib.rs (target/debug/deps/argus_provenance-8ccb2f0405b9f658)
+running 3 tests
+test tests::combine_minimums_confidence ... ok
+test tests::single_source_provenance ... ok
+test tests::combine_normalizes_weights ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_replay-ac6e556018c09e8a)
+running 4 tests
+test session::tests::branching_does_not_duplicate_market_data ... ok
+test session::tests::advance_emits_events_up_to_target ... ok
+test session::tests::seek_resets_cursor ... ok
+test session::tests::replay_is_deterministic_via_verify ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/argus_risk-45c5f0b485b8a27f)
+running 6 tests
+test state::tests::boot_to_ready_path ... ok
+test state::tests::invalid_transition_rejected ... ok
+test state::tests::killswitch_path ... ok
+test envelope::tests::conservative_default_is_sane ... ok
+test state::tests::panic_safe_from_anywhere ... ok
+test state::tests::ready_accepts_intents ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_schema-6cfab74cde55cc7b)
+running 6 tests
+test data_quality::tests::effective_confidence_decreases_with_flags ... ok
+test data_quality::tests::critical_detection ... ok
+test canonical::tests::latency_decomposition ... ok
+test canonical::tests::payload_classification ... ok
+test data_quality::tests::mark_is_idempotent ... ok
+test canonical::tests::serde_roundtrip ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/argus_shm-dcd915e1d4e7483c)
+running 6 tests
+test ring::tests::drop_drains_remaining_items ... ok
+test ring::tests::push_pop_single_thread ... ok
+test ring::tests::full_with_drop_new ... ok
+test ring::tests::capacity_must_be_power_of_two ... ok
+test ring::tests::wraparound_works_at_high_seq ... ok
+test ring::tests::concurrent_sequence_preserved ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/argus_storage-98b264ed6df170a5)
+running 14 tests
+test index::tests::seek_finds_closest_le ... ok
+test index::tests::seek_isolates_per_instrument ... ok
+test hot::tests::overflows_evict_oldest ... ok
+test index::tests::empty_index_seeks_none ... ok
+test hot::tests::insert_and_retrieve ... ok
+test hot::tests::range_filters_inclusive ... ok
+test index::tests::seek_returns_none_before_first ... ok
+test checkpoint::tests::seal_and_verify_roundtrip ... ok
+test checkpoint::tests::tampering_breaks_integrity ... ok
+test checkpoint::tests::read_latest_returns_none_when_empty ... ok
+test jsonl::tests::append_and_read_roundtrip ... ok
+test jsonl::tests::replay_is_deterministic_byte_for_byte ... ok
+test checkpoint::tests::store_persists_and_recovers ... ok
+test jsonl::tests::segment_rotates_when_size_exceeded ... ok
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+     Running unittests src/lib.rs (target/debug/deps/argus_time-2d5b2501b45897dc)
+running 14 tests
+test clock::tests::test_clock_advances_independently ... ok
+test stamps::tests::saturating_sub_returns_zero_on_underflow ... ok
+test clock::tests::real_clock_unix_is_in_range ... ok
+test stamps::tests::checked_sub_detects_underflow ... ok
+test clock::tests::test_clock_simulates_ntp_jump ... ok
+test stamps::tests::duration_ns_saturates ... ok
+test stamps::tests::display_format ... ok
+test stamps::tests::ts_wrappers_are_distinct_types ... ok
+test watermark::tests::late_event_detection ... ok
+test watermark::tests::watermark_does_not_advance_for_older_event ... ok
+test watermark::tests::watermark_advances_with_new_events ... ok
+test stamps::tests::unix_nanos_construction ... ok
+test watermark::tests::watermark_is_monotonic ... ok
+test clock::tests::real_clock_progresses ... ok
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_audit
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_capability
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_connectors_core
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_connectors_fixture
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_core_types
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_data_plane
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_decimal
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_derived
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_errors
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_ipc
+running 1 test
+test crates/argus-ipc/src/health.rs - health (line 10) ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.77s
+   Doc-tests argus_metrics
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_observability
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_orderbook
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_provenance
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_replay
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_risk
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_schema
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_shm
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_storage
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Doc-tests argus_time
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

@@ -1,0 +1,24 @@
+[package]
+name = "argus-connectors-fixture"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+rust_decimal.workspace = true
+smallvec.workspace = true
+
+argus-core-types.workspace = true
+argus-decimal.workspace = true
+argus-capability.workspace = true
+argus-schema.workspace = true
+argus-time.workspace = true
+argus-errors.workspace = true
+argus-connectors-core.workspace = true
+
+[dev-dependencies]
+rust_decimal_macros.workspace = true
